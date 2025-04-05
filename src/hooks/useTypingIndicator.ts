@@ -1,4 +1,4 @@
-import { doc, setDoc } from "firebase/firestore";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { useCallback, useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "~/lib/firebase";
@@ -37,7 +37,7 @@ export const useTypingIndicator = ({
         {
           userName: myName,
           isTyping: typing,
-          timestamp: new Date().getTime(),
+          timestamp: serverTimestamp(),
         },
         { merge: true },
       );

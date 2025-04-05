@@ -24,7 +24,7 @@ export const GroupChatScreen = () => {
   const { keyboardHeight } = useKeyboardHeight();
   const previousMessagesLength = useRef(messages.length);
 
-  // Optional
+  // OPTIONAL
   const { updateTypingStatus, typingUsers } = useTypingIndicator({
     myID,
     myName,
@@ -47,13 +47,13 @@ export const GroupChatScreen = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Rigid);
     setInputText("");
     Keyboard.dismiss();
-    // Optional
+    // OPTIONAL
     updateTypingStatus(false);
   };
 
   const onChangeText = (text: string) => {
-    // Optional
     setInputText(text);
+    // OPTIONAL
     updateTypingStatus(text.length > 0);
   };
 
@@ -70,6 +70,7 @@ export const GroupChatScreen = () => {
           flatListRef.current?.scrollToEnd({ animated: true })
         }
       />
+      {/* OPTIONAL */}
       <TypingIndicator typingUsers={typingUsers} />
       <InputField
         inputText={inputText}

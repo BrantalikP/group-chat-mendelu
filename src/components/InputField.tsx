@@ -27,6 +27,7 @@ export const InputField = ({
         placeholder="Type a message"
         placeholderTextColor={colors.textSecondary}
         style={styles.input}
+        autoCorrect={false}
       />
       <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
         <Text style={styles.sendText}>Send</Text>

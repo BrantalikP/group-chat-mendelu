@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import { colors } from "~/theme/theme";
 import { TextBubble } from "~/components/TextBubble";
 import { InputField } from "~/components/InputField";
 import {
+  Message,
   myID,
   sendMessageToFirestore,
   useRealtimeMessages,
@@ -12,6 +13,7 @@ import {
 export const GroupChatScreen = () => {
   const [inputText, setInputText] = useState("");
   const messages = useRealtimeMessages();
+  const flatListRef = useRef<FlatList<Message>>(null);
 
   const sendMessage = () => {
     if (!inputText.trim()) return;
@@ -21,11 +23,15 @@ export const GroupChatScreen = () => {
 
   return (
     <View style={styles.container}>
-      <FlatList
+      <FlatList<Message>
         data={messages}
+        ref={flatListRef}
         keyExtractor={(item) => item.id}
         renderItem={(item) => <TextBubble {...item} myId={myID} />}
         contentContainerStyle={styles.messageList}
+        onContentSizeChange={() =>
+          flatListRef.current?.scrollToEnd({ animated: true })
+        }
       />
       <InputField
         inputText={inputText}

@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { uuid } from "expo-modules-core";
 
 export const myID: string = uuid.v4();
-export const myName: string = "UserName";
+export const myName: string = "Pecan";
 
 export interface Message {
   id: string;

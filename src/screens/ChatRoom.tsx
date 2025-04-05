@@ -25,6 +25,7 @@ export const GroupChatScreen = () => {
     <View style={styles.container}>
       <FlatList<Message>
         data={messages}
+        showsVerticalScrollIndicator={false}
         ref={flatListRef}
         keyExtractor={(item) => item.id}
         renderItem={(item) => <TextBubble {...item} myId={myID} />}
@@ -48,13 +49,7 @@ const styles = StyleSheet.create({
     paddingTop: 24,
     backgroundColor: colors.primaryBackground,
   },
-  header: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: colors.textPrimary,
-    textAlign: "center",
-    marginVertical: 12,
-  },
+
   messageList: {
     paddingHorizontal: 12,
     paddingBottom: 20,

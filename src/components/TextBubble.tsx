@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { colors } from "~/theme/theme";
+import { Message } from "~/hooks/useChat";
 
 const getUserColor = (name: string) => {
   switch (name) {
@@ -18,11 +19,18 @@ const getUserColor = (name: string) => {
 };
 
 interface TextBubbleProps {
-  item: any;
+  item: Message;
+  myId: string;
 }
 
-export const TextBubble = ({ item }: TextBubbleProps) => {
-  const isCurrentUser = item.user === "You";
+export const TextBubble = ({ item, myId }: TextBubbleProps) => {
+  const isCurrentUser = item.userId === myId;
+
+  const formattedTimestamp = item.timestamp
+    ? item.timestamp
+        .toDate()
+        .toLocaleTimeString("cs-CZ", { hour: "2-digit", minute: "2-digit" })
+    : "";
 
   return (
     <View
@@ -55,7 +63,7 @@ export const TextBubble = ({ item }: TextBubbleProps) => {
             {item.image ? (
               <Image source={{ uri: item.image }} style={styles.messageImage} />
             ) : null}
-            <Text style={styles.timestamp}>{item.timestamp}</Text>
+            <Text style={styles.timestamp}>{formattedTimestamp}</Text>
           </View>
         </View>
       </View>

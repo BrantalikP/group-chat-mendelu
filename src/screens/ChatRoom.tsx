@@ -1,28 +1,21 @@
 import React, { useState } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import { colors } from "~/theme/theme";
-import { dummyMessages } from "~/mock/messages";
 import { TextBubble } from "~/components/TextBubble";
 import { InputField } from "~/components/InputField";
+import {
+  myID,
+  sendMessageToFirestore,
+  useRealtimeMessages,
+} from "~/hooks/useChat";
 
 export const GroupChatScreen = () => {
-  const [messages, setMessages] = useState(dummyMessages);
   const [inputText, setInputText] = useState("");
+  const messages = useRealtimeMessages();
 
   const sendMessage = () => {
     if (!inputText.trim()) return;
-    const newMessage = {
-      id: Date.now().toString(),
-      user: "You",
-      text: inputText,
-      timestamp: new Date().toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
-      image: null,
-    };
-    console.log("Sending message:", newMessage);
-    setMessages((prev) => [...prev, newMessage]);
+    sendMessageToFirestore({ text: inputText });
     setInputText("");
   };
 
@@ -31,7 +24,7 @@ export const GroupChatScreen = () => {
       <FlatList
         data={messages}
         keyExtractor={(item) => item.id}
-        renderItem={(item) => <TextBubble {...item} />}
+        renderItem={(item) => <TextBubble {...item} myId={myID} />}
         contentContainerStyle={styles.messageList}
       />
       <InputField

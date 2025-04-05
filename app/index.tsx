@@ -1,1 +1,1 @@
-export { ChatRoom as default } from "~/screens/ChatRoom";
+export { GroupChatScreen as default } from "~/screens/ChatRoom";

@@ -2,8 +2,8 @@ import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { colors } from "~/theme/theme";
 import { Message } from "~/hooks/useChat";
-import ColorHash from "color-hash";
-const colorHash = new ColorHash();
+import { getFormattedTimestamp } from "~/utils/getFormattedTimestamp";
+import { getUserColor } from "~/utils/getUserColor";
 
 interface TextBubbleProps {
   item: Message;
@@ -12,13 +12,6 @@ interface TextBubbleProps {
 
 export const TextBubble = ({ item, myId }: TextBubbleProps) => {
   const isCurrentUser = item.userId === myId;
-  const getUserColor = (userId: string): string => colorHash.hex(userId);
-  const formattedTimestamp = item.timestamp
-    ? item.timestamp
-        .toDate()
-        .toLocaleTimeString("cs-CZ", { hour: "2-digit", minute: "2-digit" })
-    : "";
-
   return (
     <View
       style={[
@@ -52,7 +45,9 @@ export const TextBubble = ({ item, myId }: TextBubbleProps) => {
             {item.image ? (
               <Image source={{ uri: item.image }} style={styles.messageImage} />
             ) : null}
-            <Text style={styles.timestamp}>{formattedTimestamp}</Text>
+            <Text style={styles.timestamp}>
+              {getFormattedTimestamp(item.timestamp)}
+            </Text>
           </View>
         </View>
       </View>

@@ -10,11 +10,11 @@ import {
 } from "firebase/firestore";
 import { db } from "~/lib/firebase";
 import { useEffect, useState } from "react";
-// import { uuid } from "expo-modules-core";
+import { uuid } from "expo-modules-core";
 
-// export const myID: string = uuid.v4(); //
-export const myID: string = "pecan-123456"; // TODO: Arbitrary ID
-export const myName: string = "Pecan"; // TODO: add you name
+export const myID: string = uuid.v4();
+// export const myID: string = "pecan-123456"; // TODO: Arbitrary ID
+export const myName: string = "Pecan";
 
 export interface Message {
   id: string;

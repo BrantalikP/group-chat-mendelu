@@ -8,11 +8,14 @@ import * as Haptics from "expo-haptics";
 import {
   Message,
   myID,
+  myName,
   sendMessageToFirestore,
   useRealtimeMessages,
 } from "~/hooks/useChat";
 import { useKeyboardHeight } from "~/hooks/useKeyboardHeight";
 import Animated from "react-native-reanimated";
+import { useTypingIndicator } from "~/hooks/useTypingIndicator";
+import { TypingIndicator } from "~/components/TypingIndicator";
 
 export const GroupChatScreen = () => {
   const [inputText, setInputText] = useState("");
@@ -20,6 +23,12 @@ export const GroupChatScreen = () => {
   const flatListRef = useRef<FlatList<Message>>(null);
   const { keyboardHeight } = useKeyboardHeight();
   const previousMessagesLength = useRef(messages.length);
+
+  // Optional
+  const { updateTypingStatus, typingUsers } = useTypingIndicator({
+    myID,
+    myName,
+  });
 
   useEffect(() => {
     if (
@@ -38,6 +47,14 @@ export const GroupChatScreen = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Rigid);
     setInputText("");
     Keyboard.dismiss();
+    // Optional
+    updateTypingStatus(false);
+  };
+
+  const onChangeText = (text: string) => {
+    // Optional
+    setInputText(text);
+    updateTypingStatus(text.length > 0);
   };
 
   return (
@@ -53,9 +70,10 @@ export const GroupChatScreen = () => {
           flatListRef.current?.scrollToEnd({ animated: true })
         }
       />
+      <TypingIndicator typingUsers={typingUsers} />
       <InputField
         inputText={inputText}
-        setInputText={setInputText}
+        setInputText={onChangeText}
         sendMessage={sendMessage}
       />
       <Animated.View style={keyboardHeight} />

@@ -11,6 +11,7 @@ import {
 import { db } from "~/lib/firebase";
 import { useEffect, useState } from "react";
 import { uuid } from "expo-modules-core";
+import { MESSAGES_ID } from "~/hooks/presets";
 
 export const myID: string = uuid.v4();
 // export const myID: string = "pecan-123456"; // TODO: Arbitrary ID
@@ -33,7 +34,7 @@ export const sendMessageToFirestore = async ({
   image?: string;
 }): Promise<void> => {
   try {
-    await addDoc(collection(db, "messages"), {
+    await addDoc(collection(db, MESSAGES_ID), {
       user: myName,
       userId: myID,
       text,
@@ -49,7 +50,7 @@ export const useRealtimeMessages = (): Message[] => {
   const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
-    const q = query(collection(db, "messages"), orderBy("timestamp", "asc"));
+    const q = query(collection(db, MESSAGES_ID), orderBy("timestamp", "asc"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const docs: Message[] = snapshot.docs.map((doc) => {
         const data = doc.data() as DocumentData;

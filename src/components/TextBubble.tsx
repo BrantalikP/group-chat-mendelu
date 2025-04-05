@@ -2,21 +2,8 @@ import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { colors } from "~/theme/theme";
 import { Message } from "~/hooks/useChat";
-
-const getUserColor = (name: string) => {
-  switch (name) {
-    case "Emily":
-      return colors.nameEmily;
-    case "John":
-      return colors.nameJohn;
-    case "Lisa":
-      return colors.nameLisa;
-    case "You":
-      return colors.textPrimary;
-    default:
-      return colors.textPrimary;
-  }
-};
+import ColorHash from "color-hash";
+const colorHash = new ColorHash();
 
 interface TextBubbleProps {
   item: Message;
@@ -25,7 +12,7 @@ interface TextBubbleProps {
 
 export const TextBubble = ({ item, myId }: TextBubbleProps) => {
   const isCurrentUser = item.userId === myId;
-
+  const getUserColor = (userId: string): string => colorHash.hex(userId);
   const formattedTimestamp = item.timestamp
     ? item.timestamp
         .toDate()
@@ -47,7 +34,9 @@ export const TextBubble = ({ item, myId }: TextBubbleProps) => {
         )}
         <View>
           {!isCurrentUser && (
-            <Text style={[styles.userName, { color: getUserColor(item.user) }]}>
+            <Text
+              style={[styles.userName, { color: getUserColor(item.userId) }]}
+            >
               {item.user}
             </Text>
           )}

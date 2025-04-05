@@ -58,7 +58,7 @@ export const TextBubble = ({ item, myId }: TextBubbleProps) => {
 const styles = StyleSheet.create({
   messageContainer: {
     flexDirection: "row",
-    marginBottom: 12,
+    marginTop: 12,
     flex: 1,
     maxWidth: "55%",
   },

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { View, FlatList, StyleSheet, Keyboard, Vibration } from "react-native";
+import React, { useRef, useState } from "react";
+import { View, FlatList, StyleSheet, Keyboard } from "react-native";
 import { colors } from "~/theme/theme";
 import { TextBubble } from "~/components/TextBubble";
 import { InputField } from "~/components/InputField";
@@ -15,29 +15,19 @@ import {
 import { useTypingIndicator } from "~/hooks/useTypingIndicator";
 import { TypingIndicator } from "~/components/TypingIndicator";
 import { KeyboardSpacer } from "../components/KeyboardSpacer";
+import { useMessageNotifier } from "~/hooks/useMessageNotifier";
 
 export const GroupChatScreen = () => {
+  useMessageNotifier();
   const [inputText, setInputText] = useState("");
   const messages = useRealtimeMessages();
   const flatListRef = useRef<FlatList<Message>>(null);
-  const previousMessagesLength = useRef(messages.length);
 
   // OPTIONAL
   const { updateTypingStatus, typingUsers } = useTypingIndicator({
     myID,
     myName,
   });
-
-  useEffect(() => {
-    if (
-      messages.length > previousMessagesLength.current &&
-      previousMessagesLength.current > 0 &&
-      messages[messages.length - 1].userId !== myID
-    ) {
-      Vibration.vibrate(400);
-    }
-    previousMessagesLength.current = messages.length;
-  }, [messages]);
 
   const sendMessage = () => {
     if (!inputText.trim()) return;

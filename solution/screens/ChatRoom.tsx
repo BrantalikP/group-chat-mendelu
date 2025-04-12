@@ -12,16 +12,14 @@ import {
   sendMessageToFirestore,
   useRealtimeMessages,
 } from "~/hooks/useChat";
-import { useKeyboardHeight } from "~/hooks/useKeyboardHeight";
-import Animated from "react-native-reanimated";
 import { useTypingIndicator } from "~/hooks/useTypingIndicator";
 import { TypingIndicator } from "~/components/TypingIndicator";
+import { KeyboardSpacer } from "../components/KeyboardSpacer";
 
 export const GroupChatScreen = () => {
   const [inputText, setInputText] = useState("");
   const messages = useRealtimeMessages();
   const flatListRef = useRef<FlatList<Message>>(null);
-  const { keyboardHeight } = useKeyboardHeight();
   const previousMessagesLength = useRef(messages.length);
 
   // OPTIONAL
@@ -77,7 +75,7 @@ export const GroupChatScreen = () => {
         setInputText={onChangeText}
         sendMessage={sendMessage}
       />
-      <Animated.View style={keyboardHeight} />
+      <KeyboardSpacer />
     </View>
   );
 };

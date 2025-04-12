@@ -1,5 +1,5 @@
-import { Message } from "~/hooks/useChat";
 import { Timestamp } from "firebase/firestore";
+import { Message } from "~/types";
 
 export const dummyMessages: Message[] = [
   {

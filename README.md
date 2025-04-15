@@ -1,3 +1,5 @@
+## **Prior to the workshop, the config file will be shared with you—no need to create a new Firebase project.**
+
 ## **1️⃣ Create a Firebase Project**
 
 1. Go to [https://console.firebase.google.com](https://console.firebase.google.com/)

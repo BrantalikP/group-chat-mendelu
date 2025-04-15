@@ -7,6 +7,8 @@ import {
   StyleSheet,
 } from "react-native";
 import { colors } from "~/theme/theme";
+import { router } from "expo-router";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 interface InputFieldProps {
   inputText: string;
@@ -19,6 +21,9 @@ export const InputField = ({
   setInputText,
   sendMessage,
 }: InputFieldProps) => {
+  const openCamera = () => {
+    router.navigate("/camera");
+  };
   return (
     <View style={styles.inputContainer}>
       <TextInput
@@ -29,6 +34,9 @@ export const InputField = ({
         style={styles.input}
         autoCorrect={false}
       />
+      <TouchableOpacity onPress={openCamera} style={styles.cameraButton}>
+        <Ionicons name={"camera"} size={18} color={colors.textPrimary} />
+      </TouchableOpacity>
       <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
         <Text style={styles.sendText}>Send</Text>
       </TouchableOpacity>
@@ -57,6 +65,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.accentSend,
     paddingHorizontal: 18,
     paddingVertical: 10,
+    borderRadius: 10,
+  },
+  cameraButton: {
+    marginLeft: 10,
+    backgroundColor: colors.camera,
+    paddingHorizontal: 10,
+    paddingVertical: 9,
     borderRadius: 10,
   },
   sendText: {

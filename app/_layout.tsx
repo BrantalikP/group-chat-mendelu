@@ -12,7 +12,12 @@ export default function RootLayout() {
           headerTitleStyle: styles.header,
           headerStyle: { backgroundColor: colors.primaryBackground },
         }}
-      />
+      >
+        <Stack.Screen
+          name="camera"
+          options={{ animation: "fade", headerShown: false }}
+        />
+      </Stack>
     </SafeAreaView>
   );
 }

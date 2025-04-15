@@ -7,4 +7,5 @@ export const colors = {
   textSecondary: "#A9B1BC",
   title: "#FF9500",
   accentSend: "#43AA8B",
+  camera: "#FF9500",
 };

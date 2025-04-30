@@ -1,10 +1,10 @@
-import { Timestamp } from "firebase/firestore";
+import { FieldValue } from "firebase/firestore";
 
-export interface Message {
+export interface IMessage {
   id: string;
   user: string;
   userId: string;
   text: string;
-  image: string | null;
-  timestamp: Timestamp | null;
+  image?: string;
+  timestamp?: FieldValue;
 }

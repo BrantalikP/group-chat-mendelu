@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { colors } from "~/theme/theme";
-import { Message } from "~/types";
+import { IMessage } from "~/types";
 import { getFormattedTimestamp } from "~/utils/getFormattedTimestamp";
 import { getUserColor } from "~/utils/getUserColor";
 
 interface TextBubbleProps {
-  item: Message;
+  item: IMessage;
   myId: string;
 }
 

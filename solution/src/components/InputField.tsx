@@ -10,7 +10,7 @@ import { colors } from "~/theme/theme";
 import { router } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-interface InputFieldProps {
+interface IInputField {
   inputText: string;
   setInputText: (text: string) => void;
   sendMessage: () => void;
@@ -20,7 +20,7 @@ export const InputField = ({
   inputText,
   setInputText,
   sendMessage,
-}: InputFieldProps) => {
+}: IInputField) => {
   const openCamera = () => {
     router.navigate("/camera");
   };

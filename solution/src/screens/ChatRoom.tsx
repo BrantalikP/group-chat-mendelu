@@ -15,13 +15,13 @@ import { useTypingIndicator } from "~/hooks/useTypingIndicator";
 import { TypingIndicator } from "~/components/TypingIndicator";
 import { KeyboardSpacer } from "../components/KeyboardSpacer";
 import { useMessageNotifier } from "~/hooks/useMessageNotifier";
-import { Message } from "~/types";
+import { IMessage } from "~/types";
 
 export const GroupChatScreen = () => {
   useMessageNotifier();
   const [inputText, setInputText] = useState("");
   const messages = useRealtimeMessages();
-  const flatListRef = useRef<FlatList<Message>>(null);
+  const flatListRef = useRef<FlatList<IMessage>>(null);
 
   // OPTIONAL
   const { updateTypingStatus, typingUsers } = useTypingIndicator({
@@ -29,9 +29,9 @@ export const GroupChatScreen = () => {
     myName,
   });
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (!inputText.trim()) return;
-    sendMessageToFirestore({ text: inputText });
+    await sendMessageToFirestore({ text: inputText });
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Rigid);
     setInputText("");
     Keyboard.dismiss();
@@ -47,7 +47,7 @@ export const GroupChatScreen = () => {
 
   return (
     <View style={styles.container}>
-      <FlatList<Message>
+      <FlatList<IMessage>
         data={messages}
         showsVerticalScrollIndicator={false}
         ref={flatListRef}

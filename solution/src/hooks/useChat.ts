@@ -19,7 +19,7 @@ export const myName: string = "Pecan";
 
 export const sendMessageToFirestore = async ({
   text,
-  image,
+  image = "",
 }: {
   text: string;
   image?: string;

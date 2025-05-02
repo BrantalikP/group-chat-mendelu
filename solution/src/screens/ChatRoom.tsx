@@ -31,7 +31,7 @@ export const GroupChatScreen = () => {
 
   const sendMessage = async () => {
     if (!inputText.trim()) return;
-    await sendMessageToFirestore({ text: inputText });
+    void sendMessageToFirestore({ text: inputText });
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Rigid);
     setInputText("");
     Keyboard.dismiss();

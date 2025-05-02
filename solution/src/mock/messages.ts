@@ -1,7 +1,7 @@
-import { Message } from "~/hooks/useChat";
 import { Timestamp } from "firebase/firestore";
+import { IMessage } from "~/types";
 
-export const dummyMessages: Message[] = [
+export const dummyMessages: IMessage[] = [
   {
     id: "1",
     user: "Emily",

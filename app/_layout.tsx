@@ -19,6 +19,10 @@ function RootLayout() {
         }}
       >
         <Stack.Screen name="index" />
+        <Stack.Screen
+          name="camera"
+          options={{ animation: "fade", headerShown: false }}
+        />
       </Stack>
     </View>
   );

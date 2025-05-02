@@ -1,19 +1,34 @@
 import { Stack } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import { colors } from "~/theme/theme";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
-export default function RootLayout() {
+function RootLayout() {
+  const { bottom } = useSafeAreaInsets();
+
   return (
-    <SafeAreaView edges={["bottom"]} style={{ flex: 1 }}>
+    <View style={{ flex: 1, paddingBottom: bottom }}>
       <Stack
         screenOptions={{
           title: "Chat Room",
           headerTitleStyle: styles.header,
           headerStyle: { backgroundColor: colors.primaryBackground },
         }}
-      />
-    </SafeAreaView>
+      >
+        <Stack.Screen name="index" />
+      </Stack>
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      <RootLayout />
+    </SafeAreaProvider>
   );
 }
 

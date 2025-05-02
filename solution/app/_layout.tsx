@@ -13,6 +13,7 @@ export default function RootLayout() {
           headerStyle: { backgroundColor: colors.primaryBackground },
         }}
       >
+        <Stack.Screen name="index" />
         <Stack.Screen
           name="camera"
           options={{ animation: "fade", headerShown: false }}

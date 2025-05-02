@@ -27,3 +27,11 @@ const firebaseConfig = {
   appId: "...",
 };
 ```
+
+   **3️⃣ Enable Firebase Storage (required to implement Image support)**
+
+   1.	In the left menu, go to Storage
+   2.	Click Get started
+   3.	Choose a location (same as Firestore, e.g. europe-west1) ✅
+   4.	Start in test mode ✅ (you can restrict access later in Rules)
+   5.	Done — Firebase Storage is now ready to use! 🚀
